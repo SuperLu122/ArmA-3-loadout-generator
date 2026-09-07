@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arma 3 Loadout Generator</title>
+    <meta name="description" content="Generate random authentic vanilla Arma 3 infantry loadouts with SQF export.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-main">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <h1>Arma 3 Loadout Generator</h1>
+                </div>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <button id="audio-toggle-btn" class="shortcuts-trigger-btn audio-trigger-btn" title="Sound FX Enabled - Click to Mute">
+                        🔊 <span class="btn-text">Audio FX</span>
+                    </button>
+                    <button id="shortcuts-btn" class="shortcuts-trigger-btn" title="Keyboard Shortcuts (?)">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                            <line x1="6" y1="8" x2="6" y2="8"></line>
+                            <line x1="10" y1="8" x2="10" y2="8"></line>
+                            <line x1="14" y1="8" x2="14" y2="8"></line>
+                            <line x1="18" y1="8" x2="18" y2="8"></line>
+                            <line x1="6" y1="12" x2="6" y2="12"></line>
+                            <line x1="18" y1="12" x2="18" y2="12"></line>
+                            <line x1="7" y1="16" x2="17" y2="16"></line>
+                        </svg>
+                        <span>Shortcuts</span>
+                        <kbd class="kbd-hint">?</kbd>
+                    </button>
+                </div>
+            </div>
+            <p class="subtitle">Tactical Modded Gear, Smart Randomization & SQF Export</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-target="generator-view">Random Generator</button>
+            <button class="tab-btn" data-target="armory-view">All Weapons / Armory</button>
+            <button class="tab-btn" data-target="best-loadouts-view">Best Loadouts</button>
+            <button class="tab-btn" data-target="squad-builder-view">Squad Builder</button>
+            <button class="tab-btn" data-target="mod-manager-view">Mod Registry & Custom Weapons</button>
+        </div>
+
+        <main class="main-content" id="generator-view">
+            <section class="controls-panel panel">
+                <h2>Configuration</h2>
+                <div class="form-group">
+                    <label for="faction-select">Faction</label>
+                    <select id="faction-select">
+                        <option value="Random">Random Faction</option>
+                        <option value="NATO">NATO (BLUFOR)</option>
+                        <option value="CSAT">CSAT (OPFOR)</option>
+                        <option value="AAF">AAF (INDEP)</option>
+                        <option value="FIA">FIA (Guerilla)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="role-select">Role Preset</label>
+                    <select id="role-select">
+                        <option value="Random">Random Role</option>
+                        <option value="Rifleman">Rifleman</option>
+                        <option value="Medic">Medic</option>
+                        <option value="Marksman">Marksman</option>
+                        <option value="Anti-Tank">Anti-Tank</option>
+                        <option value="Machine Gunner">Machine Gunner</option>
+                        <option value="Sniper">Sniper</option>
+                    </select>
+                </div>
+
+                <!-- Chaos Level Slider -->
+                <div class="form-group chaos-control-group">
+                    <div class="slider-header">
+                        <label for="chaos-slider">Chaos Level</label>
+                        <span id="chaos-label" class="chaos-badge level-1">1: Military Authenticity</span>
+                    </div>
+                    <input type="range" id="chaos-slider" min="1" max="3" value="1" step="1" class="chaos-slider">
+                    <p class="field-hint" id="chaos-hint">Strict faction-matching weapons, authentic camo, and standard military doctrine.</p>
+                </div>
+
+                <!-- Mod Pack Filter Toggles -->
+                <div class="form-group">
+                    <label>Active Mod Packs</label>
+                    <div class="mod-filters-grid">
+                        <label class="mod-checkbox-label">
+                            <input type="checkbox" id="mod-vanilla" checked data-mod="Vanilla">
+                            <span class="mod-chip">Vanilla A3</span>
+                        </label>
+                        <label class="mod-checkbox-label">
+                            <input type="checkbox" id="mod-rhs" checked data-mod="RHS">
+                            <span class="mod-chip">RHS (US/RU)</span>
+                        </label>
+                        <label class="mod-checkbox-label">
+                            <input type="checkbox" id="mod-cup" checked data-mod="CUP">
+                            <span class="mod-chip">CUP Weapons</span>
+                        </label>
+                        <label class="mod-checkbox-label">
+                            <input type="checkbox" id="mod-niarms" checked data-mod="NIArms">
+                            <span class="mod-chip">NIArms / HLC</span>
+                        </label>
+                        <label class="mod-checkbox-label">
+                            <input type="checkbox" id="mod-custom" checked data-mod="Custom">
+                            <span class="mod-chip">Custom Mods</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Camouflage & Biome Environment -->
+                <div class="form-group">
+                    <label for="biome-select">Environment & Camouflage</label>
+                    <select id="biome-select">
+                        <option value="auto">Auto (Faction Standard)</option>
+                        <option value="woodland">Woodland / Temperate</option>
+                        <option value="arid">Arid / Desert</option>
+                        <option value="tropic">Tropic / Jungle (Tanoa)</option>
+                        <option value="urban">Urban / MOUT</option>
+                        <option value="winter">Winter / Alpine</option>
+                    </select>
+                </div>
+
+                <!-- Optics Profile & Night Operations -->
+                <div class="form-group">
+                    <label for="optic-profile-select">Optic Profile & Range</label>
+                    <select id="optic-profile-select">
+                        <option value="any">Standard / Dynamic Optics</option>
+                        <option value="cqb">CQB / Red Dot / Holo (&lt;100m)</option>
+                        <option value="mid">Mid-Range Combat (ACO/RCO 1x-4x)</option>
+                        <option value="long">Long Range / DMR Sniper (&gt;6x)</option>
+                        <option value="thermal">Thermal / Night Sight (TWS)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="mod-checkbox-label night-ops-label">
+                        <input type="checkbox" id="night-ops-toggle">
+                        <span class="mod-chip night-ops-chip">🌙 Force Night Ops (IR Laser, NVGs & Tracers)</span>
+                    </label>
+                </div>
+
+                <!-- ACE3 Medical Depth Preset -->
+                <div class="form-group">
+                    <label for="medical-level-select">Medical System Depth</label>
+                    <select id="medical-level-select">
+                        <option value="vanilla">Vanilla Arma 3 (First Aid / Medikit)</option>
+                        <option value="ace3_standard">ACE3 Basic (Bandages, CAT, Morphine)</option>
+                        <option value="ace3_advanced">ACE3 Advanced (Elastic, QuikClot, Saline, Splints)</option>
+                    </select>
+                </div>
+
+                <!-- Weapon Caliber & Ammunition Specialty -->
+                <div class="form-group">
+                    <label for="caliber-select">Caliber Lock</label>
+                    <select id="caliber-select">
+                        <option value="any">Any / Role Appropriate</option>
+                        <option value="5.56x45mm">5.56x45mm NATO</option>
+                        <option value="6.5x39mm">6.5x39mm Caseless</option>
+                        <option value="7.62x39mm">7.62x39mm Soviet</option>
+                        <option value="7.62x51mm">7.62x51mm NATO</option>
+                        <option value="7.62x54mmR">7.62x54mmR Russian</option>
+                        <option value="9x19mm">9x19mm Parabellum</option>
+                        <option value=".338 / .408 / .50 BMG">.338 / .408 / .50 Heavy</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ammo-type-select">Ammunition Specialty</label>
+                    <select id="ammo-type-select">
+                        <option value="ball">Standard Ball Munitions</option>
+                        <option value="tracer">Tracer Rounds</option>
+                        <option value="ap">Armor-Piercing (EPR/AP/7N)</option>
+                        <option value="subsonic">Subsonic / Suppressed Special</option>
+                    </select>
+                </div>
+
+                <button id="generate-btn" class="primary-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-5.67"/>
+                    </svg>
+                    Generate Loadout
+                    <kbd class="kbd-hint">R</kbd>
+                </button>
+            </section>
+
+            <section class="results-panel">
+                <div class="loadout-display panel">
+                    <div class="panel-header">
+                        <h2>Generated Gear</h2>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button id="compare-last-btn" class="icon-btn" style="display: none;" title="Compare with previous roll">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="16 3 21 3 21 8"></polyline>
+                                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                                    <polyline points="21 16 21 21 16 21"></polyline>
+                                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                                    <line x1="4" y1="4" x2="9" y2="9"></line>
+                                </svg>
+                                Compare Last
+                            </button>
+                            <div id="loadout-meta-badge" class="meta-badge" style="display: none;"></div>
+                        </div>
+                    </div>
+                    <div id="loadout-grid" class="loadout-grid">
+                        <div class="empty-state">Click "Generate Loadout" to begin.</div>
+                    </div>
+                </div>
+
+                <!-- Weight & Logistics Panel -->
+                <div id="logistics-panel" class="logistics-panel panel" style="display: none;">
+                    <!-- Populated by UIController.renderLogistics() -->
+                </div>
+
+                <div class="sqf-export panel">
+                    <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem;">
+                        <h2>SQF Export</h2>
+                        <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                            <select id="sqf-format-select" class="sqf-format-select" title="Target Execution Context">
+                                <option value="player">player setUnitLoadout</option>
+                                <option value="this">this setUnitLoadout (Eden Init)</option>
+                                <option value="_unit">_unit setUnitLoadout (Script)</option>
+                                <option value="bis_save">call BIS_fnc_saveInventory</option>
+                            </select>
+                            <button id="download-sqf-btn" class="icon-btn" title="Download loadout as .sqf file" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                .SQF
+                            </button>
+                            <button id="export-card-btn" class="icon-btn" title="Export Briefing Card PNG for Discord / Unit Ops" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <polyline points="21 15 16 10 5 21"></polyline>
+                                </svg>
+                                Card PNG
+                            </button>
+                            <button id="share-btn" class="icon-btn" title="Share Loadout Link" disabled>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="18" cy="5" r="3"></circle>
+                                    <circle cx="6" cy="12" r="3"></circle>
+                                    <circle cx="18" cy="19" r="3"></circle>
+                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                                </svg>
+                                Share
+                            </button>
+                            <button id="copy-btn" class="icon-btn" title="Copy to Clipboard (Ctrl+Shift+C)" disabled>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                Copy
+                                <kbd class="kbd-hint">Ctrl+Shift+C</kbd>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-container">
+                        <pre><code id="sqf-output" class="language-sqf">// SQF Output will appear here...</code></pre>
+                    </div>
+                    <canvas id="briefing-card-canvas" width="800" height="480" style="display: none;"></canvas>
+                </div>
+
+                <!-- SQF Arsenal Import Panel -->
+                <div class="sqf-import panel">
+                    <div class="panel-header">
+                        <h2>Import Arsenal SQF</h2>
+                        <button id="import-toggle-btn" class="icon-btn" style="font-size: 0.8rem; padding: 0.35rem 0.6rem;">Import Kit ▼</button>
+                    </div>
+                    <div id="import-panel-body" class="import-panel-body collapsed">
+                        <p class="import-instructions" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                            Paste an existing Arma 3 <code>setUnitLoadout</code> or <code>getUnitLoadout</code> SQF array from the Virtual Arsenal, ACE3, or dedicated server logs to reverse-parse and inspect the gear.
+                        </p>
+                        <textarea id="sqf-import-area" class="sqf-textarea import-textarea" placeholder='player setUnitLoadout [["arifle_MX_F", ...], ...];'></textarea>
+                        <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.75rem; flex-wrap: wrap;">
+                            <button id="parse-import-btn" class="primary-btn" style="padding: 0.5rem 1.25rem;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="4 17 10 11 4 5"></polyline>
+                                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                                </svg>
+                                Parse & Load Kit
+                            </button>
+                            <button id="clear-import-btn" class="icon-btn">Clear</button>
+                            <span id="import-status" class="import-status"></span>
+                        </div>
+                        <div id="import-feedback" class="import-feedback" style="display: none; margin-top: 0.75rem;"></div>
+                    </div>
+                </div>
+
+                <!-- Loadout History & Favorites Panel -->
+                <div class="history-panel-wrapper panel" id="history-panel">
+                    <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <h2>Loadout History</h2>
+                            <span id="history-count" class="meta-badge" style="font-size: 0.8rem;">0</span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button id="clear-history-btn" class="icon-btn" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;" title="Clear non-favorited entries">Clear History</button>
+                            <button id="export-history-btn" class="icon-btn" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;" title="Export history as JSON">Export JSON</button>
+                            <button id="history-toggle-btn" class="icon-btn" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">Hide History ▲</button>
+                        </div>
+                    </div>
+                    <div id="history-container" class="history-container">
+                        <div class="history-empty">No loadouts generated yet. Roll one above!</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- All Weapons / Armory View -->
+        <main class="main-content" id="armory-view" style="display: none;">
+            <section class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-header" style="flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h2>All Weapons / Armory</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
+                            Full catalog of all firearms and weapon systems loaded in the database. Inspect attachments and roll custom loadouts.
+                        </p>
+                    </div>
+                    <div id="armory-count-badge" class="meta-badge" style="display: inline-block;">
+                        Loading arsenal...
+                    </div>
+                </div>
+
+                <!-- Search & Filters Container -->
+                <div class="armory-controls">
+                    <!-- Search Bar -->
+                    <div class="armory-search-wrapper">
+                        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="armory-search-input" placeholder="Search weapons by name or classname (e.g. M4A1, Katiba, 590, RPG, AKM)..." autocomplete="off">
+                        <button id="armory-search-clear" class="search-clear-btn" title="Clear Search" style="display: none;">✕</button>
+                    </div>
+
+                    <!-- Filter Row 1: Slot Category -->
+                    <div class="filter-row">
+                        <span class="filter-label">Slot Category:</span>
+                        <div class="filter-pills" id="category-filter-pills">
+                            <button class="filter-pill active" data-category="all">All Types</button>
+                            <button class="filter-pill" data-category="Rifle">Rifle</button>
+                            <button class="filter-pill" data-category="DMR/Sniper">DMR/Sniper</button>
+                            <button class="filter-pill" data-category="LMG">LMG</button>
+                            <button class="filter-pill" data-category="SMG">SMG</button>
+                            <button class="filter-pill" data-category="Shotgun">Shotgun</button>
+                            <button class="filter-pill" data-category="Launcher">Launcher</button>
+                            <button class="filter-pill" data-category="Handgun">Handgun</button>
+                        </div>
+                    </div>
+
+                    <!-- Filter Row 2: Mod Origin -->
+                    <div class="filter-row">
+                        <span class="filter-label">Mod Source:</span>
+                        <div class="filter-pills" id="mod-filter-pills">
+                            <button class="filter-pill active" data-mod="all">All Mods</button>
+                            <button class="filter-pill" data-mod="Vanilla">Vanilla A3</button>
+                            <button class="filter-pill" data-mod="RHS">RHS (US/RU)</button>
+                            <button class="filter-pill" data-mod="CUP">CUP Weapons</button>
+                            <button class="filter-pill" data-mod="NIArms">NIArms</button>
+                            <button class="filter-pill" data-mod="Custom">Custom</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weapon Grid -->
+                <div id="armory-grid" class="armory-grid">
+                    <!-- Populated dynamically by JS -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="armory-empty-state" class="empty-state" style="display: none; padding: 3rem 1rem; text-align: center;">
+                    <p style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">No weapons match your search or filters.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">Try relaxing your search terms or selecting 'All Types' / 'All Mods'.</p>
+                    <button id="armory-reset-filters-btn" class="primary-btn" style="display: inline-flex; width: auto; padding: 0.5rem 1.25rem; margin: 0 auto;">Reset Filters</button>
+                </div>
+
+                <!-- Floating Scroll to Top Action Button for Armory Tab -->
+                <button id="armory-scroll-top-btn" class="scroll-top-btn" title="Scroll to top" aria-label="Scroll to top">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                    <span class="scroll-top-text">TOP</span>
+                </button>
+            </section>
+        </main>
+
+        <main class="main-content" id="best-loadouts-view" style="display: none;">
+            <section class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+                    <div>
+                        <h2>Meta Presets & Best Loadouts</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
+                            High-performance Tier-1 loadouts featuring meta weapons, matched suppressors, LPVO/combat optics, and validated ACE3 SQF exports.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                        <button id="roll-meta-btn" class="primary-btn" style="margin-top: 0; padding: 0.65rem 1.25rem; font-size: 0.9rem; width: auto;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-5.67"/>
+                            </svg>
+                            Roll Meta Preset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Filters Bar -->
+                <div class="meta-filters-bar">
+                    <div class="meta-filter-group">
+                        <span class="meta-filter-title">Faction:</span>
+                        <div class="filter-pills" id="meta-faction-pills">
+                            <button class="pill active" data-faction="all">All Factions</button>
+                            <button class="pill" data-faction="NATO">BLUFOR (NATO)</button>
+                            <button class="pill" data-faction="CSAT">OPFOR (CSAT)</button>
+                            <button class="pill" data-faction="AAF">INDEP (AAF)</button>
+                            <button class="pill" data-faction="FIA">Guerilla (FIA)</button>
+                        </div>
+                    </div>
+
+                    <div class="meta-filter-group">
+                        <span class="meta-filter-title">Role:</span>
+                        <div class="filter-pills" id="meta-role-pills">
+                            <button class="pill active" data-role="all">All Roles</button>
+                            <button class="pill" data-role="Pointman">Pointman / Breacher</button>
+                            <button class="pill" data-role="Rifleman">Standard Rifleman</button>
+                            <button class="pill" data-role="Medic">Combat Medic</button>
+                            <button class="pill" data-role="Machine Gunner">Light Machine Gunner</button>
+                            <button class="pill" data-role="Marksman">Designated Marksman</button>
+                            <button class="pill" data-role="Sniper">Heavy Sniper</button>
+                            <button class="pill" data-role="Anti-Tank">Anti-Tank</button>
+                        </div>
+                    </div>
+
+                    <div class="meta-filter-group">
+                        <span class="meta-filter-title">Mod Suite:</span>
+                        <div class="filter-pills" id="meta-mod-pills">
+                            <button class="pill active" data-mod="all">All Suites (Hybrid Meta)</button>
+                            <button class="pill" data-mod="Vanilla">Vanilla A3</button>
+                            <button class="pill" data-mod="RHS">RHS Escalation</button>
+                            <button class="pill" data-mod="CUP">CUP Weapons</button>
+                            <button class="pill" data-mod="NIArms">NIArms</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 1.25rem 0 1rem 0;">
+                    <span id="meta-count-badge" class="armory-count-badge">Loading meta presets...</span>
+                </div>
+
+                <div id="best-loadouts-container" class="best-loadouts-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Squad Builder & Bulk Export View -->
+        <main class="main-content" id="squad-builder-view" style="display: none;">
+            <section class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-header" style="flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h2>Tactical Squad & Fireteam Builder</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
+                            Generate coordinated full-squad gear configurations with one-click bulk SQF mission export.
+                        </p>
+                    </div>
+                    <div id="squad-count-badge" class="meta-badge" style="display: inline-block;">
+                        4-Man Fireteam
+                    </div>
+                </div>
+
+                <div class="squad-controls-bar">
+                    <div class="squad-control-item">
+                        <label for="squad-template-select">Composition</label>
+                        <select id="squad-template-select">
+                            <option value="4-Man Fireteam">4-Man Fireteam (2x Rifleman, Medic, LMG)</option>
+                            <option value="6-Man SOF">6-Man SOF (Pointman, 2x Rifleman, Marksman, Medic, LMG)</option>
+                            <option value="8-Man Section">8-Man Section (Pointman, 3x Rifleman, Medic, LMG, Marksman, AT)</option>
+                            <option value="Sniper Team">Sniper Team (Sniper, Spotter/Rifleman)</option>
+                        </select>
+                    </div>
+
+                    <div class="squad-control-item">
+                        <label for="squad-faction-select">Faction</label>
+                        <select id="squad-faction-select">
+                            <option value="NATO">NATO (BLUFOR)</option>
+                            <option value="CSAT">CSAT (OPFOR)</option>
+                            <option value="AAF">AAF (INDEP)</option>
+                            <option value="FIA">FIA (Guerilla)</option>
+                        </select>
+                    </div>
+
+                    <div class="squad-control-item" style="flex: 0 0 auto;">
+                        <button id="generate-squad-btn" class="primary-btn" style="padding: 0.6rem 1.4rem;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Roll Squad
+                        </button>
+                    </div>
+
+                    <div class="squad-control-item" style="flex: 0 0 auto;">
+                        <button id="copy-squad-sqf-btn" class="icon-btn" title="Copy Bulk Squad SQF" disabled>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            Copy Squad SQF
+                        </button>
+                    </div>
+                </div>
+
+                <div id="squad-grid" class="squad-grid">
+                    <!-- Populated dynamically by UIController.renderSquad() -->
+                </div>
+
+                <div class="sqf-export panel" style="margin-top: 1.5rem;">
+                    <div class="panel-header">
+                        <h2>Bulk Squad SQF Output</h2>
+                        <button id="copy-squad-sqf-btn2" class="icon-btn" title="Copy to Clipboard" disabled>Copy SQF</button>
+                    </div>
+                    <div class="code-container">
+                        <pre><code id="squad-sqf-output" class="language-sqf">// Squad SQF will appear here after clicking "Roll Squad"...</code></pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Mod Manager & Custom Weapon Registry View -->
+        <main class="main-content" id="mod-manager-view" style="display: none;">
+            <section class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-header">
+                    <div>
+                        <h2>Modded Weapon Registry</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
+                            Add custom modded weapons or import external mod packs into the generator's smart randomization pool.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button id="reset-custom-mods-btn" class="icon-btn" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">Reset Custom Weapons</button>
+                    </div>
+                </div>
+
+                <div class="mod-manager-grid">
+                    <!-- Quick Add Form -->
+                    <div class="sub-panel">
+                        <h3>Add Custom Weapon</h3>
+                        <form id="add-weapon-form" class="custom-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="custom-weapon-id">Weapon Classname *</label>
+                                    <input type="text" id="custom-weapon-id" placeholder="e.g. tier1_sr16_carbine" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="custom-weapon-name">Display Name</label>
+                                    <input type="text" id="custom-weapon-name" placeholder="e.g. SR-16 CQB Carbine">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="custom-mag-id">Default Magazine Classname *</label>
+                                    <input type="text" id="custom-mag-id" placeholder="e.g. tier1_30rnd_556x45_pmag" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="custom-mag-capacity">Mag Capacity (Rounds)</label>
+                                    <input type="number" id="custom-mag-capacity" value="30" min="1" max="500" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="custom-caliber">Caliber</label>
+                                    <select id="custom-caliber">
+                                        <option value="5.56x45">5.56x45mm NATO</option>
+                                        <option value="5.45x39">5.45x39mm Soviet</option>
+                                        <option value="7.62x39">7.62x39mm Soviet</option>
+                                        <option value="7.62x51">7.62x51mm NATO (.308)</option>
+                                        <option value="7.62x54">7.62x54mmR</option>
+                                        <option value="6.5x39">6.5x39mm Caseless</option>
+                                        <option value="9x21">9x21mm</option>
+                                        <option value=".45ACP">.45 ACP</option>
+                                        <option value="4.6x30">4.6x30mm (MP7)</option>
+                                        <option value=".300WM">.300 Winchester Magnum</option>
+                                        <option value=".338">.338 Lapua Magnum</option>
+                                        <option value=".408">.408 CheyTac</option>
+                                        <option value="12.7x108">12.7x108mm (Anti-Materiel)</option>
+                                        <option value=".50BMG">.50 BMG (12.7x99mm)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="custom-mod-name">Mod Name</label>
+                                    <input type="text" id="custom-mod-name" value="Custom" placeholder="e.g. Tier One Weapons">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="custom-role">Designated Role *</label>
+                                    <select id="custom-role">
+                                        <option value="Rifleman">Rifleman</option>
+                                        <option value="Medic">Medic</option>
+                                        <option value="Marksman">Marksman</option>
+                                        <option value="Anti-Tank">Anti-Tank</option>
+                                        <option value="Machine Gunner">Machine Gunner</option>
+                                        <option value="Sniper">Sniper</option>
+                                        <option value="Pilot">Pilot</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="custom-faction">Primary Faction *</label>
+                                    <select id="custom-faction">
+                                        <option value="NATO">NATO (BLUFOR)</option>
+                                        <option value="CSAT">CSAT (OPFOR)</option>
+                                        <option value="AAF">AAF (INDEP)</option>
+                                        <option value="FIA">FIA (Guerilla)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="custom-optic-type">Optic Profile</label>
+                                    <select id="custom-optic-type">
+                                        <option value="mid">Mid-Range / Combat Optic (1-4x / ACOG / MRCO)</option>
+                                        <option value="cqb">CQB / Reflex / Holographic</option>
+                                        <option value="long">Long-Range Sniper Scope (SOS / LRPS / AMS)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" id="custom-has-bipod" checked>
+                                        <span>Bipod Compatible</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" id="custom-has-muzzle" checked>
+                                        <span>Suppressor Slot</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="primary-btn" style="margin-top: 1rem;">
+                                Add to Registry
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- JSON Importer / Exporter & Template -->
+                    <div class="sub-panel">
+                        <h3>Bulk JSON Importer & Template</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.75rem;">
+                            Paste custom weapon JSON definitions below or export your active custom weapon set.
+                        </p>
+                        <textarea id="custom-json-area" class="json-textarea" placeholder="Paste weapon JSON array here..."></textarea>
+                        <div style="display: flex; gap: 0.75rem; margin-top: 0.75rem;">
+                            <button id="import-json-btn" class="primary-btn" style="flex: 1;">Import JSON</button>
+                            <button id="export-json-btn" class="icon-btn" style="flex: 1; justify-content: center;">Export JSON</button>
+                        </div>
+
+                        <div class="template-box" style="margin-top: 1.5rem;">
+                            <h4>JSON Entry Template Reference</h4>
+                            <pre><code>[
+  {
+    "id": "rhs_weap_m4a1_blockII",
+    "name": "M4A1 Block II",
+    "mod": "RHS",
+    "factions": ["NATO"],
+    "roles": ["Rifleman", "Medic"],
+    "tier": "specops",
+    "caliber": "5.56x45",
+    "defaultMag": ["rhs_mag_30Rnd_556x45_M855A1_Stanag", 30],
+    "opticType": "mid",
+    "hasBipod": false,
+    "hasMuzzle": true
+  }
+]</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Weapons Registry Table -->
+                <div style="margin-top: 2rem;">
+                    <h3>Active Custom Modded Weapons (<span id="custom-count">0</span>)</h3>
+                    <div class="table-container">
+                        <table class="weapons-table">
+                            <thead>
+                                <tr>
+                                    <th>Weapon Classname</th>
+                                    <th>Name</th>
+                                    <th>Mod</th>
+                                    <th>Caliber</th>
+                                    <th>Roles</th>
+                                    <th>Factions</th>
+                                    <th>Default Mag</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="custom-weapons-tbody">
+                                <tr><td colspan="8" style="text-align: center; color: var(--text-secondary);">No custom weapons added yet. Use the form above or import JSON.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Weapon Detail Inspect Modal -->
+    <div id="armory-inspect-modal" class="armory-modal-backdrop" style="display: none;">
+        <div class="armory-modal" role="dialog" aria-modal="true" aria-labelledby="modal-weapon-name">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h3 id="modal-weapon-name" class="modal-weapon-name">Weapon Name</h3>
+                    <div class="modal-badges">
+                        <span id="modal-weapon-mod" class="tag-badge">Mod</span>
+                        <span id="modal-weapon-category" class="tag-badge">Category</span>
+                        <span id="modal-weapon-caliber" class="tag-badge">Caliber</span>
+                    </div>
+                </div>
+                <button id="modal-close-btn" class="modal-close-btn" title="Close (Esc)">✕</button>
+            </div>
+
+            <!-- Large Panoramic Weapon Preview Banner -->
+            <div class="modal-weapon-preview-container">
+                <img id="modal-weapon-img" class="modal-weapon-img weapon-photo-inspect" src="assets/real_weapons/default_rifle.png" alt="Weapon Preview" loading="eager" />
+                <div class="modal-origin-pill" id="modal-weapon-origin-pill">
+                    <span id="modal-weapon-manufacturer">Colt Defense</span> • <span id="modal-weapon-origin">United States</span>
+                </div>
+                <div class="modal-preview-watermark">
+                    <span id="modal-preview-mod-watermark">ARMA 3 TACTICAL ARSENAL</span>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <!-- Technical Specs Grid -->
+                <div class="modal-specs-grid">
+                    <div class="spec-card">
+                        <span class="spec-label">Classname</span>
+                        <div class="spec-value-code">
+                            <code id="modal-weapon-id">weapon_classname</code>
+                            <button id="modal-copy-id-btn" class="icon-btn-inline" title="Copy Classname">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                <span id="modal-copy-feedback">Copy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="spec-card">
+                        <span class="spec-label">Default Magazine</span>
+                        <span id="modal-default-mag" class="spec-value">Magazine Class (0 rnds)</span>
+                    </div>
+
+                    <div class="spec-card">
+                        <span class="spec-label">Optic Profile</span>
+                        <span id="modal-optic-profile" class="spec-value">Mid-Range Combat Optic</span>
+                    </div>
+
+                    <div class="spec-card">
+                        <span class="spec-label">Mounts & Slots</span>
+                        <span id="modal-slots-info" class="spec-value">Bipod: Yes • Muzzle: Yes</span>
+                    </div>
+                </div>
+
+                <!-- Weapon Combat Profile Radar Chart -->
+                <div class="radar-chart-container modal-section">
+                    <h4>Combat Performance Profile</h4>
+                    <div class="radar-chart-wrapper">
+                        <canvas id="modal-radar-chart" class="radar-chart-canvas" width="340" height="280"></canvas>
+                        <div id="radar-stat-chips" class="radar-stat-chips"></div>
+                    </div>
+                </div>
+
+                <!-- Compatible Attachments Sections -->
+                <div class="modal-section">
+                    <h4>Compatible Optics (<span id="modal-optics-count">0</span>)</h4>
+                    <div id="modal-optics-list" class="attachment-chip-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h4>Compatible Muzzles / Suppressors (<span id="modal-muzzles-count">0</span>)</h4>
+                    <div id="modal-muzzles-list" class="attachment-chip-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h4>Compatible Factions & Roles</h4>
+                    <div class="modal-tags-row">
+                        <div class="modal-tag-group">
+                            <span class="tag-group-label">Factions:</span>
+                            <div id="modal-factions-list" class="modal-tags-container"></div>
+                        </div>
+                        <div class="modal-tag-group">
+                            <span class="tag-group-label">Roles:</span>
+                            <div id="modal-roles-list" class="modal-tags-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="modal-roll-btn" class="primary-btn roll-weapon-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    Roll Loadout Around This Gun
+                </button>
+                <button id="modal-cancel-btn" class="icon-btn" style="justify-content: center;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loadout Comparison Modal -->
+    <div id="comparison-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-dialog comparison-dialog" role="dialog" aria-modal="true" aria-labelledby="comparison-modal-title">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                    <h3 id="comparison-modal-title" style="margin: 0;">Loadout Comparison</h3>
+                    <span id="comparison-match-badge" class="tag-badge" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3);">0 Matches</span>
+                    <span id="comparison-diff-badge" class="tag-badge" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">0 Differences</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <button id="comparison-swap-btn" class="icon-btn" title="Swap Columns">⇄ Swap</button>
+                    <button id="comparison-close-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+                </div>
+            </div>
+
+            <div class="modal-body comparison-modal-body">
+                <!-- Logistics Delta Summary -->
+                <div id="comparison-delta-bar" class="comparison-delta-bar">
+                    <!-- Populated dynamically by UIController.openComparison() -->
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Component</th>
+                                <th id="comp-col-a-header" style="width: 37.5%;">Loadout A</th>
+                                <th id="comp-col-b-header" style="width: 37.5%;">Loadout B</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparison-table-tbody">
+                            <!-- Populated dynamically by UIController.openComparison() -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="comparison-close-footer-btn" class="icon-btn" style="justify-content: center; min-width: 100px;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcuts Help Modal -->
+    <div id="shortcuts-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-dialog shortcuts-dialog" role="dialog" aria-modal="true" aria-labelledby="shortcuts-modal-title">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                        <line x1="6" y1="8" x2="6" y2="8"></line>
+                        <line x1="10" y1="8" x2="10" y2="8"></line>
+                        <line x1="14" y1="8" x2="14" y2="8"></line>
+                        <line x1="18" y1="8" x2="18" y2="8"></line>
+                        <line x1="6" y1="12" x2="6" y2="12"></line>
+                        <line x1="18" y1="12" x2="18" y2="12"></line>
+                        <line x1="7" y1="16" x2="17" y2="16"></line>
+                    </svg>
+                    <h3 id="shortcuts-modal-title" style="margin: 0;">Keyboard Shortcuts</h3>
+                </div>
+                <button id="shortcuts-close-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+            </div>
+
+            <div class="modal-body shortcuts-modal-body">
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0; margin-bottom: 1rem;">
+                    Tactical hotkeys for rapid loadout generation, SQF clipboard copying, armory searching, and tab navigation.
+                </p>
+                <table class="shortcuts-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;">Key</th>
+                            <th style="width: 65%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><kbd>R</kbd></td>
+                            <td>Roll / Generate new loadout</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd></td>
+                            <td>Copy current loadout SQF to clipboard</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>1</kbd> – <kbd>5</kbd></td>
+                            <td>Switch tabs: Generator (1), Armory (2), Meta (3), Squad (4), Mods (5)</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>/</kbd></td>
+                            <td>Focus armory search bar</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>F</kbd></td>
+                            <td>Toggle favorite on current loadout</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>?</kbd></td>
+                            <td>Toggle keyboard shortcuts help modal</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>Esc</kbd></td>
+                            <td>Close any open modal or dialog</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button id="shortcuts-close-footer-btn" class="icon-btn" style="justify-content: center; min-width: 100px;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=3"></script>
+</body>
+</html>
