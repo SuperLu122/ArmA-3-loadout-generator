@@ -252,7 +252,6 @@ const BUILTIN_WEAPONS = Object.freeze([
     { id: "rhs_weap_m16a2_m203", name: "M16A2 M203 Classic (RHS)", mod: "RHS", factions: ["NATO","FIA"], roles: ["Rifleman"], tier: "standard", caliber: "5.56x45", defaultMag: ["rhs_mag_30Rnd_556x45_M855A1_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/rhs_weap_m16a2_m203.png" },
     { id: "rhs_weap_hk416d10_m320", name: "HK416 D10 M320 (RHS)", mod: "RHS", factions: ["NATO"], roles: ["Rifleman"], tier: "specops", caliber: "5.56x45", defaultMag: ["rhs_mag_30Rnd_556x45_M855A1_Stanag", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/rhs_weap_hk416d10_m320.png" },
     { id: "rhs_weap_m38", name: "Mosin-Nagant M38 Carbine", mod: "RHS", factions: ["FIA"], roles: ["Marksman","Rifleman"], tier: "militia", caliber: "7.62x54", defaultMag: ["rhsgref_5Rnd_762x54_m38", 5], opticType: "mid", hasBipod: false, hasMuzzle: false, photoUrl: "assets/weapons/photos/rhs_weap_m38.png" },
-    { id: "rhs_weap_m107", name: "Barrett M107 .50 BMG (RHS)", mod: "RHS", factions: ["NATO"], roles: ["Sniper"], tier: "specops", caliber: ".50BMG", defaultMag: ["rhsusf_mag_10Rnd_STD_50BMG_M33", 10], opticType: "long", hasBipod: true, defaultBipod: "rhsusf_acc_harris_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/rhs_weap_m107.png" },
     { id: "rhs_weap_m110", name: "KAC M110 SASS 7.62mm", mod: "RHS", factions: ["NATO"], roles: ["Marksman","Sniper"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_20Rnd_762x51_m118_special_Mag", 20], opticType: "long", hasBipod: true, defaultBipod: "rhsusf_acc_harris_bipod", hasMuzzle: true, photoUrl: "assets/weapons/photos/rhs_weap_m110.png" },
     { id: "rhs_weap_m249_pip_S_para", name: "M249 Para Short Collapsible SAW", mod: "RHS", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "5.56x45", defaultMag: ["rhsusf_200Rnd_556x45_box", 200], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/rhs_weap_m249_pip_S_para.png" },
     { id: "rhs_weap_mk48", name: "Mk48 Mod 1 7.62mm LMG", mod: "RHS", factions: ["NATO"], roles: ["Machine Gunner"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/rhs_weap_mk48.png" },
@@ -696,7 +695,6 @@ const BUILTIN_WEAPONS = Object.freeze([
     { id: "CUP_srifle_AWM_blk", name: "AWM .338 Black (CUP)", mod: "CUP", factions: ["NATO","FIA"], roles: ["Sniper"], tier: "specops", caliber: ".338", defaultMag: ["CUP_5Rnd_86x70_L115A1", 5], opticType: "long", hasBipod: true, defaultBipod: "bipod_01_F_blk", hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_srifle_AWM_blk.png" },
     { id: "CUP_lmg_M249", name: "M249 SAW Classic (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "5.56x45", defaultMag: ["CUP_200Rnd_TE4_Red_Tracer_556x45_M249", 200], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_lmg_M249.png" },
     { id: "CUP_lmg_M249_para", name: "M249 Para SAW (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "5.56x45", defaultMag: ["CUP_200Rnd_TE4_Red_Tracer_556x45_M249", 200], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_lmg_M249_para.png" },
-    { id: "CUP_lmg_mk48", name: "Mk48 Mod 0 7.62mm (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_lmg_mk48.png" },
     { id: "CUP_lmg_L7A2", name: "L7A2 GPMG 7.62mm (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_lmg_L7A2.png" },
     { id: "CUP_smg_MP5K_PDW", name: "HK MP5K-PDW 9mm", mod: "CUP", factions: ["NATO","FIA"], roles: ["Pilot","Medic"], tier: "specops", caliber: "9x21", defaultMag: ["CUP_30Rnd_9x19_MP5", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_smg_MP5K_PDW.png" },
     { id: "CUP_arifle_L85A2_Grip", name: "L85A2 Foregrip 5.56mm", mod: "CUP", factions: ["NATO"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_arifle_L85A2_Grip.png" },
@@ -713,7 +711,6 @@ const BUILTIN_WEAPONS = Object.freeze([
     { id: "CUP_CZ_BREN2_762_11", name: "CZ BREN 2 7.62mm 11-inch CQB", mod: "CUP", factions: ["AAF"], roles: ["Rifleman","Medic"], tier: "specops", caliber: "7.62x39", defaultMag: ["rhs_30Rnd_762x39mm_89", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_CZ_BREN2_762_11.png" },
     { id: "CUP_smg_MP5A4", name: "H&K MP5A4 Burst", mod: "CUP", factions: ["NATO","AAF"], roles: ["Pilot","Medic"], tier: "standard", caliber: "9x21", defaultMag: ["30Rnd_9x21_Mag", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_smg_MP5A4.png" },
     { id: "CUP_smg_MP5SD5", name: "H&K MP5SD5 Integrated Suppressed", mod: "CUP", factions: ["NATO","AAF"], roles: ["Pilot","Medic"], tier: "specops", caliber: "9x21", defaultMag: ["30Rnd_9x21_Mag", 30], opticType: "cqb", hasBipod: false, hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_smg_MP5SD5.png" },
-    { id: "CUP_lmg_m249_para", name: "M249 Para SAW (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "5.56x45", defaultMag: ["rhsusf_200Rnd_556x45_box", 200], opticType: "mid", hasBipod: true, defaultBipod: "bipod_01_F_blk", hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_lmg_m249_para.png" },
     { id: "CUP_arifle_M4A1_black_desert", name: "M4A1 Railed Black (Desert)", mod: "CUP", factions: ["NATO"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_arifle_M4A1_black_desert.png" },
     { id: "CUP_arifle_M4A1_black_woodland", name: "M4A1 Railed Black (Woodland)", mod: "CUP", factions: ["NATO"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_arifle_M4A1_black_woodland.png" },
     { id: "CUP_arifle_M4A1_black_camo", name: "M4A1 Railed Black (Camo)", mod: "CUP", factions: ["NATO"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_arifle_M4A1_black_camo.png" },
@@ -995,7 +992,6 @@ const BUILTIN_WEAPONS = Object.freeze([
     { id: "hlc_rifle_SAMR", name: "West River SAM-R Match", mod: "NIArms", factions: ["NATO"], roles: ["Marksman"], tier: "specops", caliber: "5.56x45", defaultMag: ["rhs_mag_30Rnd_556x45_M855A1_Stanag", 30], opticType: "long", hasBipod: true, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_SAMR.png" },
     { id: "hlc_rifle_awmagnum_BL", name: "AI AWM .338 Black", mod: "NIArms", factions: ["NATO"], roles: ["Sniper"], tier: "specops", caliber: ".338", defaultMag: ["CUP_5Rnd_86x70_L115A1", 5], opticType: "long", hasBipod: true, defaultBipod: "bipod_01_F_blk", hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_awmagnum_BL.png" },
     { id: "hlc_rifle_awcovert_BL", name: "AI AWS Suppressed .308", mod: "NIArms", factions: ["NATO"], roles: ["Sniper","Marksman"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_5Rnd_762x51_m118_special_Mag", 5], opticType: "long", hasBipod: true, defaultBipod: "bipod_01_F_blk", hasMuzzle: false, photoUrl: "assets/weapons/photos/hlc_rifle_awcovert_BL.png" },
-    { id: "hlc_lmg_m60e4", name: "M60E4 / Mk43 Mod 1", mod: "NIArms", factions: ["NATO"], roles: ["Machine Gunner"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, hasMuzzle: false, photoUrl: "assets/weapons/photos/hlc_lmg_m60e4.png" },
     { id: "hlc_lmg_M60", name: "M60 Vietnam Classic", mod: "NIArms", factions: ["NATO","FIA"], roles: ["Machine Gunner"], tier: "standard", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, hasMuzzle: false, photoUrl: "assets/weapons/photos/hlc_lmg_M60.png" },
     { id: "hlc_smg_mp5k_PDW", name: "MP5K PDW Folding Stock", mod: "NIArms", factions: ["NATO"], roles: ["Pilot","Medic"], tier: "specops", caliber: "9x21", defaultMag: ["CUP_30Rnd_9x19_MP5", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_smg_mp5k_PDW.png" },
     { id: "hlc_smg_mp5sd5", name: "MP5SD5 Fixed Stock", mod: "NIArms", factions: ["NATO"], roles: ["Pilot","Medic"], tier: "specops", caliber: "9x21", defaultMag: ["CUP_30Rnd_9x19_MP5", 30], opticType: "cqb", hasBipod: false, hasMuzzle: false, photoUrl: "assets/weapons/photos/hlc_smg_mp5sd5.png" },
@@ -1007,7 +1003,6 @@ const BUILTIN_WEAPONS = Object.freeze([
     { id: "hlc_rifle_g3ka4", name: "H&K G3KA4 Carbine", mod: "NIArms", factions: ["AAF"], roles: ["Rifleman","Medic"], tier: "specops", caliber: "7.62x51", defaultMag: ["20Rnd_762x51_Mag", 20], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_g3ka4.png" },
     { id: "hlc_rifle_aug", name: "Steyr AUG A1 Olive (HLC)", mod: "NIArms", factions: ["AAF"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_aug.png" },
     { id: "hlc_rifle_auga3", name: "Steyr AUG A3 Modern Rail", mod: "NIArms", factions: ["AAF"], roles: ["Rifleman","Anti-Tank"], tier: "specops", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_auga3.png" },
-    { id: "hlc_rifle_sg550", name: "SIG SG 550 5.56mm Swiss", mod: "NIArms", factions: ["AAF"], roles: ["Rifleman","Marksman"], tier: "specops", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: true, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_sg550.png" },
     { id: "hlc_rifle_sg553", name: "SIG SG 553 Commando", mod: "NIArms", factions: ["AAF"], roles: ["Medic","Pilot"], tier: "specops", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_sg553.png" },
     { id: "hlc_rifle_FAL5000", name: "FN FAL 50.00 Battle Rifle", mod: "NIArms", factions: ["FIA"], roles: ["Rifleman","Marksman"], tier: "militia", caliber: "7.62x51", defaultMag: ["20Rnd_762x51_Mag", 20], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_FAL5000.png" },
     { id: "hlc_rifle_FALPara", name: "FN FAL 50.63 Paratrooper", mod: "NIArms", factions: ["FIA"], roles: ["Rifleman","Medic"], tier: "specops", caliber: "7.62x51", defaultMag: ["20Rnd_762x51_Mag", 20], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_FALPara.png" },
@@ -3612,16 +3607,16 @@ class RadarChart {
             else ctx.lineTo(pt.x, pt.y);
         });
         ctx.closePath();
-        ctx.fillStyle = options.fillColor || 'rgba(59, 130, 246, 0.35)';
+        ctx.fillStyle = options.fillColor || 'rgba(194, 96, 58, 0.28)';
         ctx.fill();
 
         // Stroke outline
-        ctx.strokeStyle = options.strokeColor || '#3b82f6';
+        ctx.strokeStyle = options.strokeColor || '#C2603A';
         ctx.lineWidth = 2;
         ctx.stroke();
 
         // Draw point dots
-        ctx.fillStyle = options.pointColor || '#60a5fa';
+        ctx.fillStyle = options.pointColor || '#C2603A';
         dataPoints.forEach(pt => {
             ctx.beginPath();
             ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
@@ -4163,10 +4158,7 @@ class ArmoryController {
                     ${item.hasMuzzle ? `<span class="spec-chip chip-feature">Suppressor</span>` : ""}
                 </div>
                 <div class="weapon-card-footer">
-                    <span>Inspect & Roll</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
+                    <span>Inspect &amp; roll</span>
                 </div>
             </div>
         `).join("");
@@ -4856,7 +4848,7 @@ class UIController {
 
                 if (metaBadge && rolled.loadoutData.meta) {
                     metaBadge.style.display = "inline-block";
-                    metaBadge.textContent = "🎯 META PRESET: " + rolled.presetTitle + " • [" + rolled.loadoutData.meta.primaryMod + "] " + rolled.loadoutData.meta.caliber;
+                    metaBadge.textContent = "META PRESET: " + rolled.presetTitle + " / [" + rolled.loadoutData.meta.primaryMod + "] " + rolled.loadoutData.meta.caliber;
                 }
 
                 loadoutGrid.innerHTML = `
@@ -5146,7 +5138,7 @@ class UIController {
                     <td>${this.escapeHtml(w.factions.join(", "))}</td>
                     <td><code>${this.escapeHtml(w.defaultMag[0])} (${w.defaultMag[1]} rnd)</code></td>
                     <td>
-                        <button class="icon-btn delete-custom-btn" data-index="${idx}" style="color: #ef4444; padding: 0.3rem 0.6rem;">Delete</button>
+                        <button class="icon-btn delete-custom-btn" data-index="${idx}">Delete</button>
                     </td>
                 </tr>
             `;
@@ -5238,7 +5230,7 @@ class UIController {
                         <button class="history-action-btn" data-action="compare" data-id="${entry.id}" title="Compare with current loadout">⇄</button>
                         <button class="history-action-btn" data-action="restore" data-id="${entry.id}" title="Restore this loadout">↻</button>
                         <button class="history-action-btn" data-action="copy-sqf" data-id="${entry.id}" title="Copy SQF">⎘</button>
-                        <button class="history-action-btn delete" data-action="delete" data-id="${entry.id}" title="Delete">✕</button>
+                        <button class="history-action-btn delete" data-action="delete" data-id="${entry.id}" title="Delete">×</button>
                     </div>
                 </div>
             `;
@@ -5726,7 +5718,7 @@ class UIController {
             if (result.warnings && result.warnings.length > 0) {
                 importFeedback.innerHTML = `
                     <div class="import-feedback-box warning">
-                        <strong>⚠️ Notice:</strong> ${result.warnings.map(w => this.escapeHtml(w)).join('; ')}
+                        <strong>Notice:</strong> ${result.warnings.map(w => this.escapeHtml(w)).join('; ')}
                     </div>
                 `;
                 importFeedback.style.display = 'block';
@@ -6968,11 +6960,11 @@ class SoundController {
         if (!btn) return;
         if (this.isMuted) {
             btn.classList.add('muted');
-            btn.innerHTML = '🔇 <span class="btn-text">Muted</span>';
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg> <span class="btn-text">Muted</span>';
             btn.title = 'Sound FX Muted - Click to Unmute';
         } else {
             btn.classList.remove('muted');
-            btn.innerHTML = '🔊 <span class="btn-text">Audio FX</span>';
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> <span class="btn-text">Audio FX</span>';
             btn.title = 'Sound FX Enabled - Click to Mute';
         }
     }
@@ -7083,11 +7075,11 @@ class BriefingCardGenerator {
         const height = canvas.height || 480;
 
         // Background
-        ctx.fillStyle = '#0a0e14';
+        ctx.fillStyle = '#0D0B0A';
         ctx.fillRect(0, 0, width, height);
 
         // Grid lines overlay (tactical HUD look)
-        ctx.strokeStyle = '#141d2b';
+        ctx.strokeStyle = '#2A2522';
         ctx.lineWidth = 1;
         for (let x = 0; x < width; x += 40) {
             ctx.beginPath();
@@ -7103,19 +7095,19 @@ class BriefingCardGenerator {
         }
 
         // Exterior tactical border & corner brackets
-        ctx.strokeStyle = '#00ff88';
+        ctx.strokeStyle = '#C2603A';
         ctx.lineWidth = 2;
         ctx.strokeRect(10, 10, width - 20, height - 20);
 
         // Header Banner
-        ctx.fillStyle = '#111927';
+        ctx.fillStyle = '#1A1715';
         ctx.fillRect(12, 12, width - 24, 60);
 
-        ctx.fillStyle = '#00ff88';
+        ctx.fillStyle = '#C2603A';
         ctx.font = 'bold 18px monospace';
         ctx.fillText('ARMA 3 TACTICAL LOADOUT BRIEFING // COMBAT MANIFEST', 28, 38);
 
-        ctx.fillStyle = '#94a3b8';
+        ctx.fillStyle = '#A0968D';
         ctx.font = '13px monospace';
         const faction = loadoutData.faction || 'NATO';
         const role = loadoutData.role || 'Operator';
@@ -7124,11 +7116,11 @@ class BriefingCardGenerator {
         ctx.fillText(`FACTION: [${faction.toUpperCase()}]   ROLE: [${role.toUpperCase()}]   CALIBER: [${caliber}]   MOD: [${mod}]`, 28, 58);
 
         // Left Section: Equipment Manifest (x: 28, width: 440)
-        ctx.fillStyle = '#00ff88';
+        ctx.fillStyle = '#C2603A';
         ctx.font = 'bold 14px monospace';
         ctx.fillText('PRIMARY ARSENAL & KIT', 28, 105);
 
-        ctx.strokeStyle = '#223249';
+        ctx.strokeStyle = '#37302C';
         ctx.beginPath();
         ctx.moveTo(28, 112);
         ctx.lineTo(460, 112);
@@ -7158,18 +7150,18 @@ class BriefingCardGenerator {
 
         let curY = 132;
         items.forEach(it => {
-            ctx.fillStyle = '#64748b';
+            ctx.fillStyle = '#6A625C';
             ctx.font = 'bold 11px monospace';
             ctx.fillText(it.label + ':', 28, curY);
 
-            ctx.fillStyle = '#f8fafc';
+            ctx.fillStyle = '#EDE5DC';
             ctx.font = '12px monospace';
             const valStr = String(it.val).length > 36 ? String(it.val).slice(0, 34) + '...' : String(it.val);
             ctx.fillText(valStr, 175, curY);
 
             if (it.sub) {
                 curY += 14;
-                ctx.fillStyle = '#38bdf8';
+                ctx.fillStyle = '#5C8D84';
                 ctx.font = '10px monospace';
                 const subStr = String(it.sub).length > 44 ? String(it.sub).slice(0, 42) + '...' : String(it.sub);
                 ctx.fillText('↳ ' + subStr, 175, curY);
@@ -7180,17 +7172,17 @@ class BriefingCardGenerator {
         // Logistics line
         if (typeof LogisticsCalculator !== 'undefined' && typeof LogisticsCalculator.analyze === 'function') {
             const log = LogisticsCalculator.analyze(loadoutData);
-            ctx.fillStyle = '#fbbf24';
+            ctx.fillStyle = '#5C8D84';
             ctx.font = 'bold 12px monospace';
             ctx.fillText(`WEIGHT: ${log.totalWeightKg}kg [${log.encumbranceLevel}] | AMMO: ${log.totalRounds} rds | SUSTAIN: ~${log.sustainabilityMinutes}m`, 28, 425);
         }
 
         // Right Section: Tactical Radar Chart & Combat Ratings
-        ctx.fillStyle = '#00ff88';
+        ctx.fillStyle = '#C2603A';
         ctx.font = 'bold 14px monospace';
         ctx.fillText('COMBAT PROFILE RADAR', 500, 105);
 
-        ctx.strokeStyle = '#223249';
+        ctx.strokeStyle = '#37302C';
         ctx.beginPath();
         ctx.moveTo(500, 112);
         ctx.lineTo(770, 112);
@@ -7201,10 +7193,10 @@ class BriefingCardGenerator {
             stats = RadarChart.calculateStats(loadoutData);
             if (typeof RadarChart.drawOnContext === 'function') {
                 RadarChart.drawOnContext(ctx, stats, 635, 230, 85, {
-                    textColor: '#94a3b8',
-                    gridColor: '#223249',
-                    accentColor: 'rgba(0, 255, 136, 0.45)',
-                    pointColor: '#00ff88',
+                    textColor: '#A0968D',
+                    gridColor: '#37302C',
+                    accentColor: 'rgba(194, 96, 58, 0.35)',
+                    pointColor: '#C2603A',
                     fontSize: '11px monospace'
                 });
             }
@@ -7212,11 +7204,11 @@ class BriefingCardGenerator {
 
         // Stats summary breakdown
         const statEntries = [
-            { label: 'FIREPOWER', val: stats.firepower, col: '#f87171' },
-            { label: 'MOBILITY', val: stats.mobility, col: '#34d399' },
-            { label: 'SURVIVAL', val: stats.survivability, col: '#60a5fa' },
-            { label: 'SUSTAIN', val: stats.sustainability, col: '#fbbf24' },
-            { label: 'RANGE', val: stats.range, col: '#a78bfa' }
+            { label: 'FIREPOWER', val: stats.firepower, col: '#C2603A' },
+            { label: 'MOBILITY', val: stats.mobility, col: '#C2603A' },
+            { label: 'SURVIVAL', val: stats.survivability, col: '#C2603A' },
+            { label: 'SUSTAIN', val: stats.sustainability, col: '#C2603A' },
+            { label: 'RANGE', val: stats.range, col: '#C2603A' }
         ];
 
         let statX = 490;
@@ -7228,15 +7220,15 @@ class BriefingCardGenerator {
         });
 
         // Bottom Footer Bar
-        ctx.fillStyle = '#111927';
+        ctx.fillStyle = '#1A1715';
         ctx.fillRect(12, 442, width - 24, 26);
 
-        ctx.fillStyle = '#64748b';
+        ctx.fillStyle = '#6A625C';
         ctx.font = '10px monospace';
         const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
         ctx.fillText(`CONFIDENTIAL // ARMA 3 LOADOUT ENGINE // GENERATED: ${timestamp} UTC`, 24, 458);
 
-        ctx.fillStyle = '#00ff88';
+        ctx.fillStyle = '#C2603A';
         ctx.font = 'bold 10px monospace';
         ctx.fillText('STATUS: DEPLOYMENT READY', 625, 458);
     }

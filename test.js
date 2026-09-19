@@ -331,7 +331,7 @@ assert(bren2 && bren2.mod === 'CUP' && bren2.caliber === '7.62x39', 'CZ BREN 2 7
 const m77 = catalog.find(w => w.id === 'rhs_weap_m77');
 assert(m77 && m77.mod === 'RHS' && m77.caliber === '7.62x51', 'Zastava M77 registered in RHS');
 
-const m107Rhs = catalog.find(w => w.id === 'rhs_weap_m107');
+const m107Rhs = catalog.find(w => w.id === 'rhs_weap_M107');
 assert(m107Rhs && m107Rhs.caliber === '.50BMG' && m107Rhs.category === 'DMR/Sniper', 'RHS M107 registered as .50BMG Sniper');
 
 const saigaRhs = catalog.find(w => w.id === 'rhs_weap_saiga12');

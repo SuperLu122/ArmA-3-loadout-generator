@@ -391,7 +391,6 @@ const WEAPONS_PART1: readonly WeaponDef[] = [
     { id: "rhs_weap_m16a2_m203", name: "M16A2 M203 Classic (RHS)", mod: "RHS", factions: ["NATO","FIA"], roles: ["Rifleman"], tier: "standard", caliber: "5.56x45", defaultMag: ["rhs_mag_30Rnd_556x45_M855A1_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/rhs_weap_m16a2_m203.png" },
     { id: "rhs_weap_hk416d10_m320", name: "HK416 D10 M320 (RHS)", mod: "RHS", factions: ["NATO"], roles: ["Rifleman"], tier: "specops", caliber: "5.56x45", defaultMag: ["rhs_mag_30Rnd_556x45_M855A1_Stanag", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/rhs_weap_hk416d10_m320.png" },
     { id: "rhs_weap_m38", name: "Mosin-Nagant M38 Carbine", mod: "RHS", factions: ["FIA"], roles: ["Marksman","Rifleman"], tier: "militia", caliber: "7.62x54", defaultMag: ["rhsgref_5Rnd_762x54_m38", 5], opticType: "mid", hasBipod: false, hasMuzzle: false, photoUrl: "assets/weapons/photos/rhs_weap_m38.png" },
-    { id: "rhs_weap_m107", name: "Barrett M107 .50 BMG (RHS)", mod: "RHS", factions: ["NATO"], roles: ["Sniper"], tier: "specops", caliber: ".50BMG", defaultMag: ["rhsusf_mag_10Rnd_STD_50BMG_M33", 10], opticType: "long", hasBipod: true, defaultBipod: "rhsusf_acc_harris_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/rhs_weap_m107.png" },
     { id: "rhs_weap_m110", name: "KAC M110 SASS 7.62mm", mod: "RHS", factions: ["NATO"], roles: ["Marksman","Sniper"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_20Rnd_762x51_m118_special_Mag", 20], opticType: "long", hasBipod: true, defaultBipod: "rhsusf_acc_harris_bipod", hasMuzzle: true, photoUrl: "assets/weapons/photos/rhs_weap_m110.png" },
     { id: "rhs_weap_m249_pip_S_para", name: "M249 Para Short Collapsible SAW", mod: "RHS", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "5.56x45", defaultMag: ["rhsusf_200Rnd_556x45_box", 200], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/rhs_weap_m249_pip_S_para.png" },
     { id: "rhs_weap_mk48", name: "Mk48 Mod 1 7.62mm LMG", mod: "RHS", factions: ["NATO"], roles: ["Machine Gunner"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/rhs_weap_mk48.png" },
@@ -837,7 +836,6 @@ const WEAPONS_PART2: readonly WeaponDef[] = [
     { id: "CUP_srifle_AWM_blk", name: "AWM .338 Black (CUP)", mod: "CUP", factions: ["NATO","FIA"], roles: ["Sniper"], tier: "specops", caliber: ".338", defaultMag: ["CUP_5Rnd_86x70_L115A1", 5], opticType: "long", hasBipod: true, defaultBipod: "bipod_01_F_blk", hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_srifle_AWM_blk.png" },
     { id: "CUP_lmg_M249", name: "M249 SAW Classic (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "5.56x45", defaultMag: ["CUP_200Rnd_TE4_Red_Tracer_556x45_M249", 200], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_lmg_M249.png" },
     { id: "CUP_lmg_M249_para", name: "M249 Para SAW (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "5.56x45", defaultMag: ["CUP_200Rnd_TE4_Red_Tracer_556x45_M249", 200], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_lmg_M249_para.png" },
-    { id: "CUP_lmg_mk48", name: "Mk48 Mod 0 7.62mm (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, defaultBipod: "rhsusf_acc_saw_bipod", hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_lmg_mk48.png" },
     { id: "CUP_lmg_L7A2", name: "L7A2 GPMG 7.62mm (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_lmg_L7A2.png" },
     { id: "CUP_smg_MP5K_PDW", name: "HK MP5K-PDW 9mm", mod: "CUP", factions: ["NATO","FIA"], roles: ["Pilot","Medic"], tier: "specops", caliber: "9x21", defaultMag: ["CUP_30Rnd_9x19_MP5", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_smg_MP5K_PDW.png" },
     { id: "CUP_arifle_L85A2_Grip", name: "L85A2 Foregrip 5.56mm", mod: "CUP", factions: ["NATO"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_arifle_L85A2_Grip.png" },
@@ -854,7 +852,6 @@ const WEAPONS_PART2: readonly WeaponDef[] = [
     { id: "CUP_CZ_BREN2_762_11", name: "CZ BREN 2 7.62mm 11-inch CQB", mod: "CUP", factions: ["AAF"], roles: ["Rifleman","Medic"], tier: "specops", caliber: "7.62x39", defaultMag: ["rhs_30Rnd_762x39mm_89", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_CZ_BREN2_762_11.png" },
     { id: "CUP_smg_MP5A4", name: "H&K MP5A4 Burst", mod: "CUP", factions: ["NATO","AAF"], roles: ["Pilot","Medic"], tier: "standard", caliber: "9x21", defaultMag: ["30Rnd_9x21_Mag", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_smg_MP5A4.png" },
     { id: "CUP_smg_MP5SD5", name: "H&K MP5SD5 Integrated Suppressed", mod: "CUP", factions: ["NATO","AAF"], roles: ["Pilot","Medic"], tier: "specops", caliber: "9x21", defaultMag: ["30Rnd_9x21_Mag", 30], opticType: "cqb", hasBipod: false, hasMuzzle: false, photoUrl: "assets/weapons/photos/CUP_smg_MP5SD5.png" },
-    { id: "CUP_lmg_m249_para", name: "M249 Para SAW (CUP)", mod: "CUP", factions: ["NATO"], roles: ["Machine Gunner"], tier: "standard", caliber: "5.56x45", defaultMag: ["rhsusf_200Rnd_556x45_box", 200], opticType: "mid", hasBipod: true, defaultBipod: "bipod_01_F_blk", hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_lmg_m249_para.png" },
     { id: "CUP_arifle_M4A1_black_desert", name: "M4A1 Railed Black (Desert)", mod: "CUP", factions: ["NATO"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_arifle_M4A1_black_desert.png" },
     { id: "CUP_arifle_M4A1_black_woodland", name: "M4A1 Railed Black (Woodland)", mod: "CUP", factions: ["NATO"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_arifle_M4A1_black_woodland.png" },
     { id: "CUP_arifle_M4A1_black_camo", name: "M4A1 Railed Black (Camo)", mod: "CUP", factions: ["NATO"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/CUP_arifle_M4A1_black_camo.png" },
@@ -1136,7 +1133,6 @@ const WEAPONS_PART2: readonly WeaponDef[] = [
     { id: "hlc_rifle_SAMR", name: "West River SAM-R Match", mod: "NIArms", factions: ["NATO"], roles: ["Marksman"], tier: "specops", caliber: "5.56x45", defaultMag: ["rhs_mag_30Rnd_556x45_M855A1_Stanag", 30], opticType: "long", hasBipod: true, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_SAMR.png" },
     { id: "hlc_rifle_awmagnum_BL", name: "AI AWM .338 Black", mod: "NIArms", factions: ["NATO"], roles: ["Sniper"], tier: "specops", caliber: ".338", defaultMag: ["CUP_5Rnd_86x70_L115A1", 5], opticType: "long", hasBipod: true, defaultBipod: "bipod_01_F_blk", hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_awmagnum_BL.png" },
     { id: "hlc_rifle_awcovert_BL", name: "AI AWS Suppressed .308", mod: "NIArms", factions: ["NATO"], roles: ["Sniper","Marksman"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_5Rnd_762x51_m118_special_Mag", 5], opticType: "long", hasBipod: true, defaultBipod: "bipod_01_F_blk", hasMuzzle: false, photoUrl: "assets/weapons/photos/hlc_rifle_awcovert_BL.png" },
-    { id: "hlc_lmg_m60e4", name: "M60E4 / Mk43 Mod 1", mod: "NIArms", factions: ["NATO"], roles: ["Machine Gunner"], tier: "specops", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, hasMuzzle: false, photoUrl: "assets/weapons/photos/hlc_lmg_m60e4.png" },
     { id: "hlc_lmg_M60", name: "M60 Vietnam Classic", mod: "NIArms", factions: ["NATO","FIA"], roles: ["Machine Gunner"], tier: "standard", caliber: "7.62x51", defaultMag: ["rhsusf_100Rnd_762x51", 100], opticType: "mid", hasBipod: true, hasMuzzle: false, photoUrl: "assets/weapons/photos/hlc_lmg_M60.png" },
     { id: "hlc_smg_mp5k_PDW", name: "MP5K PDW Folding Stock", mod: "NIArms", factions: ["NATO"], roles: ["Pilot","Medic"], tier: "specops", caliber: "9x21", defaultMag: ["CUP_30Rnd_9x19_MP5", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_smg_mp5k_PDW.png" },
     { id: "hlc_smg_mp5sd5", name: "MP5SD5 Fixed Stock", mod: "NIArms", factions: ["NATO"], roles: ["Pilot","Medic"], tier: "specops", caliber: "9x21", defaultMag: ["CUP_30Rnd_9x19_MP5", 30], opticType: "cqb", hasBipod: false, hasMuzzle: false, photoUrl: "assets/weapons/photos/hlc_smg_mp5sd5.png" },
@@ -1148,7 +1144,6 @@ const WEAPONS_PART2: readonly WeaponDef[] = [
     { id: "hlc_rifle_g3ka4", name: "H&K G3KA4 Carbine", mod: "NIArms", factions: ["AAF"], roles: ["Rifleman","Medic"], tier: "specops", caliber: "7.62x51", defaultMag: ["20Rnd_762x51_Mag", 20], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_g3ka4.png" },
     { id: "hlc_rifle_aug", name: "Steyr AUG A1 Olive (HLC)", mod: "NIArms", factions: ["AAF"], roles: ["Rifleman","Anti-Tank"], tier: "standard", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_aug.png" },
     { id: "hlc_rifle_auga3", name: "Steyr AUG A3 Modern Rail", mod: "NIArms", factions: ["AAF"], roles: ["Rifleman","Anti-Tank"], tier: "specops", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_auga3.png" },
-    { id: "hlc_rifle_sg550", name: "SIG SG 550 5.56mm Swiss", mod: "NIArms", factions: ["AAF"], roles: ["Rifleman","Marksman"], tier: "specops", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "mid", hasBipod: true, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_sg550.png" },
     { id: "hlc_rifle_sg553", name: "SIG SG 553 Commando", mod: "NIArms", factions: ["AAF"], roles: ["Medic","Pilot"], tier: "specops", caliber: "5.56x45", defaultMag: ["30Rnd_556x45_Stanag", 30], opticType: "cqb", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_sg553.png" },
     { id: "hlc_rifle_FAL5000", name: "FN FAL 50.00 Battle Rifle", mod: "NIArms", factions: ["FIA"], roles: ["Rifleman","Marksman"], tier: "militia", caliber: "7.62x51", defaultMag: ["20Rnd_762x51_Mag", 20], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_FAL5000.png" },
     { id: "hlc_rifle_FALPara", name: "FN FAL 50.63 Paratrooper", mod: "NIArms", factions: ["FIA"], roles: ["Rifleman","Medic"], tier: "specops", caliber: "7.62x51", defaultMag: ["20Rnd_762x51_Mag", 20], opticType: "mid", hasBipod: false, hasMuzzle: true, photoUrl: "assets/weapons/photos/hlc_rifle_FALPara.png" },
@@ -3858,10 +3853,7 @@ class ArmoryController {
                     ${item.hasMuzzle ? `<span class="spec-chip chip-feature">Suppressor</span>` : ""}
                 </div>
                 <div class="weapon-card-footer">
-                    <span>Inspect & Roll</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
+                    <span>Inspect &amp; roll</span>
                 </div>
             </div>
         `).join("");
@@ -4432,7 +4424,7 @@ class UIController {
 
                 if (metaBadge && rolled.loadoutData.meta) {
                     metaBadge.style.display = "inline-block";
-                    metaBadge.textContent = `🎯 META PRESET: ${rolled.presetTitle} • [${rolled.loadoutData.meta.primaryMod}] ${rolled.loadoutData.meta.caliber}`;
+                    metaBadge.textContent = `META PRESET: ${rolled.presetTitle} / [${rolled.loadoutData.meta.primaryMod}] ${rolled.loadoutData.meta.caliber}`;
                 }
 
                 loadoutGrid.innerHTML = `
@@ -4743,7 +4735,7 @@ class UIController {
                     <td>${this.escapeHtml(w.factions.join(", "))}</td>
                     <td><code>${this.escapeHtml(w.defaultMag[0])} (${w.defaultMag[1]} rnd)</code></td>
                     <td>
-                        <button class="icon-btn delete-custom-btn" data-index="${idx}" style="color: #ef4444; padding: 0.3rem 0.6rem;">Delete</button>
+                        <button class="icon-btn delete-custom-btn" data-index="${idx}">Delete</button>
                     </td>
                 </tr>
             `;

@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arma 3 Loadout Generator</title>
     <meta name="description" content="Generate random authentic vanilla Arma 3 infantry loadouts with SQF export.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
     <div class="app-container">
@@ -20,7 +22,7 @@
                 </div>
                 <div style="display: flex; gap: 0.5rem; align-items: center;">
                     <button id="audio-toggle-btn" class="shortcuts-trigger-btn audio-trigger-btn" title="Sound FX Enabled - Click to Mute">
-                        🔊 <span class="btn-text">Audio FX</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> <span class="btn-text">Audio FX</span>
                     </button>
                     <button id="shortcuts-btn" class="shortcuts-trigger-btn" title="Keyboard Shortcuts (?)">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -50,6 +52,10 @@
         </div>
 
         <main class="main-content" id="generator-view">
+            <div class="view-header">
+                <h2>Roll a loadout</h2>
+                <p>Choose a faction and a role; the engine fills in the rest. Every roll exports as SQF you can paste straight into Eden.</p>
+            </div>
             <section class="controls-panel panel">
                 <h2>Configuration</h2>
                 <div class="form-group">
@@ -141,7 +147,7 @@
                 <div class="form-group">
                     <label class="mod-checkbox-label night-ops-label">
                         <input type="checkbox" id="night-ops-toggle">
-                        <span class="mod-chip night-ops-chip">🌙 Force Night Ops (IR Laser, NVGs & Tracers)</span>
+                        <span class="mod-chip night-ops-chip">Force Night Ops (IR Laser, NVGs & Tracers)</span>
                     </label>
                 </div>
 
@@ -273,15 +279,15 @@
                 <div class="sqf-import panel">
                     <div class="panel-header">
                         <h2>Import Arsenal SQF</h2>
-                        <button id="import-toggle-btn" class="icon-btn" style="font-size: 0.8rem; padding: 0.35rem 0.6rem;">Import Kit ▼</button>
+                        <button id="import-toggle-btn" class="icon-btn">Import Kit ▼</button>
                     </div>
                     <div id="import-panel-body" class="import-panel-body collapsed">
-                        <p class="import-instructions" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        <p class="import-instructions">
                             Paste an existing Arma 3 <code>setUnitLoadout</code> or <code>getUnitLoadout</code> SQF array from the Virtual Arsenal, ACE3, or dedicated server logs to reverse-parse and inspect the gear.
                         </p>
                         <textarea id="sqf-import-area" class="sqf-textarea import-textarea" placeholder='player setUnitLoadout [["arifle_MX_F", ...], ...];'></textarea>
                         <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.75rem; flex-wrap: wrap;">
-                            <button id="parse-import-btn" class="primary-btn" style="padding: 0.5rem 1.25rem;">
+                            <button id="parse-import-btn" class="primary-btn">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="4 17 10 11 4 5"></polyline>
                                     <line x1="12" y1="19" x2="20" y2="19"></line>
@@ -300,12 +306,12 @@
                     <div class="panel-header" style="flex-wrap: wrap; gap: 0.75rem;">
                         <div style="display: flex; align-items: center; gap: 0.75rem;">
                             <h2>Loadout History</h2>
-                            <span id="history-count" class="meta-badge" style="font-size: 0.8rem;">0</span>
+                            <span id="history-count" class="meta-badge">0</span>
                         </div>
                         <div style="display: flex; gap: 0.5rem; align-items: center;">
-                            <button id="clear-history-btn" class="icon-btn" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;" title="Clear non-favorited entries">Clear History</button>
-                            <button id="export-history-btn" class="icon-btn" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;" title="Export history as JSON">Export JSON</button>
-                            <button id="history-toggle-btn" class="icon-btn" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">Hide History ▲</button>
+                            <button id="clear-history-btn" class="icon-btn" title="Clear non-favorited entries">Clear History</button>
+                            <button id="export-history-btn" class="icon-btn" title="Export history as JSON">Export JSON</button>
+                            <button id="history-toggle-btn" class="icon-btn">Hide History ▲</button>
                         </div>
                     </div>
                     <div id="history-container" class="history-container">
@@ -317,14 +323,12 @@
 
         <!-- All Weapons / Armory View -->
         <main class="main-content" id="armory-view" style="display: none;">
+            <div class="view-header">
+                <h2>All Weapons / Armory</h2>
+                <p>Full catalog of all firearms and weapon systems loaded in the database. Inspect attachments and roll custom loadouts.</p>
+            </div>
             <section class="panel" style="grid-column: 1 / -1;">
                 <div class="panel-header" style="flex-wrap: wrap; gap: 1rem;">
-                    <div>
-                        <h2>All Weapons / Armory</h2>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
-                            Full catalog of all firearms and weapon systems loaded in the database. Inspect attachments and roll custom loadouts.
-                        </p>
-                    </div>
                     <div id="armory-count-badge" class="meta-badge" style="display: inline-block;">
                         Loading arsenal...
                     </div>
@@ -339,7 +343,7 @@
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
                         <input type="text" id="armory-search-input" placeholder="Search weapons by name or classname (e.g. M4A1, Katiba, 590, RPG, AKM)..." autocomplete="off">
-                        <button id="armory-search-clear" class="search-clear-btn" title="Clear Search" style="display: none;">✕</button>
+                        <button id="armory-search-clear" class="search-clear-btn" title="Clear search" style="display: none;">×</button>
                     </div>
 
                     <!-- Filter Row 1: Slot Category -->
@@ -377,10 +381,10 @@
                 </div>
 
                 <!-- Empty State -->
-                <div id="armory-empty-state" class="empty-state" style="display: none; padding: 3rem 1rem; text-align: center;">
-                    <p style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">No weapons match your search or filters.</p>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">Try relaxing your search terms or selecting 'All Types' / 'All Mods'.</p>
-                    <button id="armory-reset-filters-btn" class="primary-btn" style="display: inline-flex; width: auto; padding: 0.5rem 1.25rem; margin: 0 auto;">Reset Filters</button>
+                <div id="armory-empty-state" class="empty-state" style="display: none;">
+                    <p class="empty-title">No weapons match your search or filters.</p>
+                    <p>Try relaxing your search terms or selecting 'All Types' / 'All Mods'.</p>
+                    <button id="armory-reset-filters-btn" class="primary-btn">Reset Filters</button>
                 </div>
 
                 <!-- Floating Scroll to Top Action Button for Armory Tab -->
@@ -394,16 +398,14 @@
         </main>
 
         <main class="main-content" id="best-loadouts-view" style="display: none;">
+            <div class="view-header">
+                <h2>Meta Presets & Best Loadouts</h2>
+                <p>High-performance Tier-1 loadouts featuring meta weapons, matched suppressors, LPVO/combat optics, and validated ACE3 SQF exports.</p>
+            </div>
             <section class="panel" style="grid-column: 1 / -1;">
                 <div class="panel-header" style="flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
-                    <div>
-                        <h2>Meta Presets & Best Loadouts</h2>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
-                            High-performance Tier-1 loadouts featuring meta weapons, matched suppressors, LPVO/combat optics, and validated ACE3 SQF exports.
-                        </p>
-                    </div>
                     <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-                        <button id="roll-meta-btn" class="primary-btn" style="margin-top: 0; padding: 0.65rem 1.25rem; font-size: 0.9rem; width: auto;">
+                        <button id="roll-meta-btn" class="primary-btn">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-5.67"/>
                             </svg>
@@ -463,14 +465,12 @@
 
         <!-- Squad Builder & Bulk Export View -->
         <main class="main-content" id="squad-builder-view" style="display: none;">
+            <div class="view-header">
+                <h2>Tactical Squad & Fireteam Builder</h2>
+                <p>Generate coordinated full-squad gear configurations with one-click bulk SQF mission export.</p>
+            </div>
             <section class="panel" style="grid-column: 1 / -1;">
                 <div class="panel-header" style="flex-wrap: wrap; gap: 1rem;">
-                    <div>
-                        <h2>Tactical Squad & Fireteam Builder</h2>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
-                            Generate coordinated full-squad gear configurations with one-click bulk SQF mission export.
-                        </p>
-                    </div>
                     <div id="squad-count-badge" class="meta-badge" style="display: inline-block;">
                         4-Man Fireteam
                     </div>
@@ -498,7 +498,7 @@
                     </div>
 
                     <div class="squad-control-item" style="flex: 0 0 auto;">
-                        <button id="generate-squad-btn" class="primary-btn" style="padding: 0.6rem 1.4rem;">
+                        <button id="generate-squad-btn" class="primary-btn">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="9" cy="7" r="4"></circle>
@@ -538,16 +538,14 @@
 
         <!-- Mod Manager & Custom Weapon Registry View -->
         <main class="main-content" id="mod-manager-view" style="display: none;">
+            <div class="view-header">
+                <h2>Modded Weapon Registry</h2>
+                <p>Add custom modded weapons or import external mod packs into the generator's smart randomization pool.</p>
+            </div>
             <section class="panel" style="grid-column: 1 / -1;">
                 <div class="panel-header">
-                    <div>
-                        <h2>Modded Weapon Registry</h2>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem;">
-                            Add custom modded weapons or import external mod packs into the generator's smart randomization pool.
-                        </p>
-                    </div>
                     <div style="display: flex; gap: 0.5rem;">
-                        <button id="reset-custom-mods-btn" class="icon-btn" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">Reset Custom Weapons</button>
+                        <button id="reset-custom-mods-btn" class="icon-btn delete">Reset Custom Weapons</button>
                     </div>
                 </div>
 
@@ -658,7 +656,7 @@
                     <!-- JSON Importer / Exporter & Template -->
                     <div class="sub-panel">
                         <h3>Bulk JSON Importer & Template</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.75rem;">
+                        <p>
                             Paste custom weapon JSON definitions below or export your active custom weapon set.
                         </p>
                         <textarea id="custom-json-area" class="json-textarea" placeholder="Paste weapon JSON array here..."></textarea>
@@ -706,7 +704,7 @@
                                 </tr>
                             </thead>
                             <tbody id="custom-weapons-tbody">
-                                <tr><td colspan="8" style="text-align: center; color: var(--text-secondary);">No custom weapons added yet. Use the form above or import JSON.</td></tr>
+                                <tr><td colspan="8">No custom weapons added yet. Use the form above or import JSON.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -727,7 +725,7 @@
                         <span id="modal-weapon-caliber" class="tag-badge">Caliber</span>
                     </div>
                 </div>
-                <button id="modal-close-btn" class="modal-close-btn" title="Close (Esc)">✕</button>
+                <button id="modal-close-btn" class="modal-close-btn" title="Close (Esc)">×</button>
             </div>
 
             <!-- Large Panoramic Weapon Preview Banner -->
@@ -833,11 +831,11 @@
             <div class="modal-header">
                 <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
                     <h3 id="comparison-modal-title" style="margin: 0;">Loadout Comparison</h3>
-                    <span id="comparison-match-badge" class="tag-badge" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3);">0 Matches</span>
-                    <span id="comparison-diff-badge" class="tag-badge" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">0 Differences</span>
+                    <span id="comparison-match-badge" class="tag-badge delta-badge better">0 Matches</span>
+                    <span id="comparison-diff-badge" class="tag-badge delta-badge worse">0 Differences</span>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <button id="comparison-swap-btn" class="icon-btn" title="Swap Columns">⇄ Swap</button>
+                    <button id="comparison-swap-btn" class="icon-btn" title="Swap columns">Swap columns</button>
                     <button id="comparison-close-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
                 </div>
             </div>
@@ -892,7 +890,7 @@
             </div>
 
             <div class="modal-body shortcuts-modal-body">
-                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0; margin-bottom: 1rem;">
+                <p>
                     Tactical hotkeys for rapid loadout generation, SQF clipboard copying, armory searching, and tab navigation.
                 </p>
                 <table class="shortcuts-table">
